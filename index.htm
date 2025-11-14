@@ -1,14 +1,315 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intensivt Gympass - Din Guide till Bättre Träning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
 
-    <h1>Intesivt gympass</h1>
-    <h1>hjkjkjhhkj</h1>
-    <h1>hjkjkjhhkj</h1>
-    <h1>hjkjkjhhkj!!!!!!!!!!!!!!!!!</h1>
-    </body>    
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Exercise Grid */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .exercise-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .exercise-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-card .image-placeholder {
+            background: #ddd;
+            height: 200px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .difficulty.beginner {
+            background: #4ade80;
+            color: white;
+        }
+
+        .difficulty.intermediate {
+            background: #fbbf24;
+            color: white;
+        }
+
+        .difficulty.advanced {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hem">Hem</a></li>
+            <li><a href="#overkropp">Överkropp</a></li>
+            <li><a href="#underkropp">Underkropp</a></li>
+            <li><a href="#cardio">Cardio</a></li>
+            <li><a href="#tips">Träningsips</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Intensivt Gympass</h1>
+        <p>Din kompletta guide till effektiv träning - från nybörjare till avancerad nivå</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Introduction Section -->
+        <div id="hem" class="section">
+            <h2>Välkommen till Intensivt Gympass</h2>
+            <p>Här hittar du allt du behöver för att ta din träning till nästa nivå. Varje övning presenteras med korrekt teknik, vanliga misstag att undvika, och progressionsmetoder för att kontinuerligt utmana dig själv.</p>
+        </div>
+
+        <!-- Upper Body Section -->
+        <div id="overkropp" class="section">
+            <h2>Överkroppsövningar</h2>
+            <div class="exercise-grid">
+                
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av bänkpress]</div>
+                    <h3>Bänkpress</h3>
+                    <p><strong>Teknik:</strong> Ligg plant på bänken, fötterna i golvet. Greppet något bredare än axelbredd. Sänk vikten kontrollerat till bröstet, pressa sedan upp.</p>
+                    <p><strong>Intensifiering:</strong> Öka vikt, lägg till pauser vid bröst, använd chains eller bands.</p>
+                    <span class="difficulty beginner">Nybörjare</span>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av pull-ups]</div>
+                    <h3>Chins / Pull-ups</h3>
+                    <p><strong>Teknik:</strong> Häng i stången med raka armar. Dra upp kroppen tills hakan är över stången. Kontrollerad nedgång.</p>
+                    <p><strong>Intensifiering:</strong> Lägg till viktbälte, öka tempo, utför negativa repetitioner.</p>
+                    <span class="difficulty intermediate">Medel</span>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av axelpress]</div>
+                    <h3>Axelpress</h3>
+                    <p><strong>Teknik:</strong> Stående eller sittande, press hantlar eller skivstång över huvudet. Spänn mage och bak.</p>
+                    <p><strong>Intensifiering:</strong> Arnold press, enarmsvarianter, ökad volym.</p>
+                    <span class="difficulty beginner">Nybörjare</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Lower Body Section -->
+        <div id="underkropp" class="section">
+            <h2>Underkroppsövningar</h2>
+            <div class="exercise-grid">
+                
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av knäböj]</div>
+                    <h3>Knäböj</h3>
+                    <p><strong>Teknik:</strong> Fötter axelbrett isär, sänk höfterna bakåt och nedåt. Håll ryggen rak. Pressa upp genom hälarna.</p>
+                    <p><strong>Intensifiering:</strong> Front squat, pause squats, box squats med chains.</p>
+                    <span class="difficulty beginner">Nybörjare</span>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av marklyft]</div>
+                    <h3>Marklyft</h3>
+                    <p><strong>Teknik:</strong> Fötter under höftbredden, grip stången, håll rygg neutral. Lyft genom att sträcka höft och knän samtidigt.</p>
+                    <p><strong>Intensifiering:</strong> Deficit deadlifts, Romanian deadlift, banded deadlifts.</p>
+                    <span class="difficulty intermediate">Medel</span>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av utfall]</div>
+                    <h3>Utfall (Lunges)</h3>
+                    <p><strong>Teknik:</strong> Ta ett stort steg framåt, sänk bakre knä mot golvet. Pressa upp via främre häl.</p>
+                    <p><strong>Intensifiering:</strong> Walking lunges, reverse lunges, Bulgarian split squats.</p>
+                    <span class="difficulty beginner">Nybörjare</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Cardio Section -->
+        <div id="cardio" class="section">
+            <h2>Konditionsträning</h2>
+            <div class="exercise-grid">
+                
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av HIIT]</div>
+                    <h3>HIIT Intervaller</h3>
+                    <p><strong>Teknik:</strong> 30 sek max intensitet, 30 sek vila. Upprepa 10-20 rundor.</p>
+                    <p><strong>Intensifiering:</strong> Kortare vila, längre arbetsperioder, lägg till motstånd.</p>
+                    <span class="difficulty advanced">Avancerad</span>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="image-placeholder">[Lägg till bild av rodd]</div>
+                    <h3>Roddmaskin</h3>
+                    <p><strong>Teknik:</strong> Dra med benen först, sedan rygg och armar. Släpp ut i omvänd ordning.</p>
+                    <p><strong>Intensifiering:</strong> Öka motstånd, tidstagning på 500m, intervallträning.</p>
+                    <span class="difficulty beginner">Nybörjare</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Training Tips Section -->
+        <div id="tips" class="section">
+            <h2>Träningstips för Progression</h2>
+            <ul style="line-height: 2; margin-left: 1.5rem;">
+                <li><strong>Progressiv överbelastning:</strong> Öka vikt, reps eller sets gradvis varje vecka</li>
+                <li><strong>Rätt teknik först:</strong> Mästra formen innan du lägger på mer vikt</li>
+                <li><strong>Vila och återhämtning:</strong> Muskler växer när du vilar, inte när du tränar</li>
+                <li><strong>Variation:</strong> Byt övningar var 4-6:e vecka för att undvika platåer</li>
+                <li><strong>Näring:</strong> Ät tillräckligt med protein (1.6-2g per kg kroppsvikt)</li>
+                <li><strong>Dokumentera:</strong> För träningslogg för att följa din utveckling</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Intensivt Gympass. All rights reserved.</p>
+        <p>Din guide till bättre träning och hälsa</p>
+    </footer>
+
+</body>
 </html>
