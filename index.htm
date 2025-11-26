@@ -1,844 +1,135 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avancerade Träningspass - Social Media Edition</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <title>My Workout Videos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 30px 10px;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: #fff;
-        }
+    .video-box {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
 
-        /* Navigation */
-        nav {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(255, 0, 0, 0.3);
-            border-bottom: 2px solid #ff0040;
-        }
+    iframe {
+      width: 100%;
+      height: 400px;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding: 0 1rem;
-        }
+    .controls {
+      padding: 15px;
+      background: #000;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    button {
+      background: #ff0000;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
 
-        nav a:hover {
-            color: #ff0040;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #ff0040 0%, #ff6b6b 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 0L50 50M50 50L100 0M50 50L100 100M50 50L0 100" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.05);
-            margin: 2rem 0;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .section h2 {
-            color: #ff0040;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            border-bottom: 3px solid #ff0040;
-            padding-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Influencer Workout Card */
-        .workout-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            border-left: 5px solid #ff0040;
-            transition: all 0.3s;
-        }
-
-        .workout-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 40px rgba(255, 0, 64, 0.3);
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .influencer-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .influencer-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff0040, #ff6b6b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            border: 3px solid #fff;
-        }
-
-        .influencer-info h3 {
-            font-size: 1.8rem;
-            color: #ff0040;
-            margin-bottom: 0.3rem;
-        }
-
-        .influencer-info p {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        .social-badge {
-            background: rgba(255, 0, 64, 0.2);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #ff0040;
-            font-weight: 600;
-        }
-
-        /* Video Container */
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 1.5rem auto;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-        }
-
-        .video-placeholder {
-            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            border: 2px dashed #ff0040;
-            margin: 1.5rem 0;
-        }
-
-        .video-placeholder-text {
-            text-align: center;
-            color: #ff0040;
-        }
-
-        .video-placeholder-text h4 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Exercise Details */
-        .exercise-details {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-
-        .exercise-details h4 {
-            color: #ff0040;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .exercise-details ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .exercise-details li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .exercise-details li::before {
-            content: '💪';
-            position: absolute;
-            left: 0;
-        }
-
-        .sets-reps {
-            background: rgba(255, 0, 64, 0.2);
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #ff0040;
-        }
-
-        .pro-tip {
-            background: rgba(255, 215, 0, 0.1);
-            border-left: 4px solid #ffd700;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 5px;
-        }
-
-        .pro-tip strong {
-            color: #ffd700;
-        }
-
-        /* Grid for multiple videos */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            border-top: 2px solid #ff0040;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .video-container iframe {
-                height: 250px;
-            }
-
-            .influencer-header {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+    button:hover {
+      background: #cc0000;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#hem">Hem</a></li>
-            <li><a href="#brost">Bröst</a></li>
-            <li><a href="#rygg">Rygg</a></li>
-            <li><a href="#ben">Ben</a></li>
-            <li><a href="#axlar">Axlar</a></li>
-            <li><a href="#armar">Armar</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>🔥 Elite Fitness Workouts 🔥</h1>
-        <p>Lär dig av världens bästa - Avancerade träningspass från social media's största fitness-profiler</p>
-    </div>
+<h1>🔥 Workout Video Gallery 🔥</h1>
 
-    <!-- Main Content -->
-    <div class="container">
-        
-        <!-- Introduction -->
-        <div id="hem" class="section">
-            <h2>Träna som proffsen</h2>
-            <p style="font-size: 1.2rem; line-height: 1.8;">Här hittar du avancerade träningspass och tekniker från några av världens mest populära fitness-influencers. Dessa övningar och metoder har hjälpt miljontals människor att nå sina träningsmål. Varje övning inkluderar videoinstruktioner och detaljerade förklaringar.</p>
-        </div>
+<!-- VIDEO 1 -->
+<div class="video-box">
+  <iframe
+    class="yt-video"
+    data-video-id="VZ3b0a8bX1o"
+    src=""
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
 
-        <!-- Chest Workouts -->
-        <div id="brost" class="section">
-            <h2>💪 Brösträning</h2>
-            
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">CB</div>
-                    <div class="influencer-info">
-                        <h3>Chris Bumstead - Olympia Bröstpass</h3>
-                        <p>5x Mr. Olympia Classic Physique Champion</p>
-                    </div>
-                    <span class="social-badge">Instagram: @cbum</span>
-                </div>
+  <div class="controls">
+    <button onclick="playVideo(0)">▶ Play</button>
+    <button onclick="pauseVideo(0)">⏸ Pause</button>
+  </div>
+</div>
 
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/VZ3b0a8bX1o" 
-                            title="Chris Bumstead Chest Workout" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
+<!-- VIDEO 2 -->
+<div class="video-box">
+  <iframe
+    class="yt-video"
+    data-video-id="dQw4w9WgXcQ"
+    src=""
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
 
-                <div class="exercise-details">
-                    <h4>Övningar i passet:</h4>
-                    <ul>
-                        <li><strong>Incline Dumbbell Press:</strong> Fokus på övre bröst, kontrollerad negativ fas</li>
-                        <li><strong>Flat Barbell Bench Press:</strong> Compound rörelse för total bröstutveckling</li>
-                        <li><strong>Cable Flyes (Höga och Låga):</strong> Isolering och stretch för max pump</li>
-                        <li><strong>Dips:</strong> Bodyweight finisher för nedre bröst</li>
-                    </ul>
-                    <span class="sets-reps">4 sets × 8-12 reps per övning</span>
-                    
-                    <div class="pro-tip">
-                        <strong>💡 CB's Pro-Tip:</strong> Fokusera på mind-muscle connection. Tänk mindre vikt, bättre teknik. Känn verkligen att bröstmusklerna arbetar i varje rep.
-                    </div>
-                </div>
-            </div>
+  <div class="controls">
+    <button onclick="playVideo(1)">▶ Play</button>
+    <button onclick="pauseVideo(1)">⏸ Pause</button>
+  </div>
+</div>
 
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">JN</div>
-                    <div class="influencer-info">
-                        <h3>Jeff Nippard - Vetenskapsbaserad Bröstteknik</h3>
-                        <p>Science-Based Training Expert</p>
-                    </div>
-                    <span class="social-badge">YouTube: Jeff Nippard</span>
-                </div>
+<!-- VIDEO 3 -->
+<div class="video-box">
+  <iframe
+    class="yt-video"
+    data-video-id="l482T0yNkeo"
+    src=""
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
 
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/zLktNwGqHDI" 
-                            title="Jeff Nippard Chest Training" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
+  <div class="controls">
+    <button onclick="playVideo(2)">▶ Play</button>
+    <button onclick="pauseVideo(2)">⏸ Pause</button>
+  </div>
+</div>
 
-                <div class="exercise-details">
-                    <h4>Vetenskaplig approach:</h4>
-                    <ul>
-                        <li><strong>Optimal Stretch Position:</strong> Maximera muskelsträckning för hypertrofi</li>
-                        <li><strong>Progressive Overload:</strong> Öka vikt eller volym varje vecka</li>
-                        <li><strong>Tempo Training:</strong> 3-1-1-0 (3 sek negativ, 1 sek paus, 1 sek koncentrisk)</li>
-                    </ul>
-                    <span class="sets-reps">3-4 sets × 6-15 reps</span>
-                </div>
-            </div>
-        </div>
+<!-- SCRIPT -->
+<script>
+  const videos = document.querySelectorAll(".yt-video");
 
-        <!-- Back Workouts -->
-        <div id="rygg" class="section">
-            <h2>💪 Ryggträning</h2>
-            
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">DM</div>
-                    <div class="influencer-info">
-                        <h3>David Laid - Aesthetic Back Workout</h3>
-                        <p>Fitness Model & Influencer</p>
-                    </div>
-                    <span class="social-badge">Instagram: @davidlaid</span>
-                </div>
+  // Lazy load + autoplay när man scrollar till video
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const iframe = entry.target;
+        const id = iframe.dataset.videoId;
 
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/eE7bzQBWTKc" 
-                            title="David Laid Back Workout" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
+        if (!iframe.src.includes("youtube")) {
+          iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}`;
+        }
+      }
+    });
+  }, { threshold: 0.6 });
 
-                <div class="exercise-details">
-                    <h4>Fokusområden:</h4>
-                    <ul>
-                        <li><strong>Weighted Pull-Ups:</strong> King of back exercises - bred rygg</li>
-                        <li><strong>Barbell Rows:</strong> Tjocklek i mitten av ryggen</li>
-                        <li><strong>T-Bar Rows:</strong> Lower lats och ryggdjup</li>
-                        <li><strong>Face Pulls:</strong> Bakre deltoider och postur</li>
-                        <li><strong>Close Grip Pulldowns:</strong> Lat width development</li>
-                    </ul>
-                    <span class="sets-reps">4 sets × 6-10 reps (tyngre övningar) | 3 sets × 12-15 reps (isolering)</span>
-                    
-                    <div class="pro-tip">
-                        <strong>💡 David's Tip:</strong> Retract your scapula på alla pulling övningar. Tänk "dra armbågarna bakåt" istället för att bara dra med armarna.
-                    </div>
-                </div>
-            </div>
+  videos.forEach(video => observer.observe(video));
 
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">JM</div>
-                    <div class="influencer-info">
-                        <h3>John Meadows - Mountain Dog Back Training</h3>
-                        <p>Legendary Bodybuilding Coach (RIP)</p>
-                    </div>
-                    <span class="social-badge">YouTube: Mountaindog1</span>
-                </div>
+  // Play/Pause kontroller
+  function playVideo(i) {
+    const id = videos[i].dataset.videoId;
+    videos[i].src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0`;
+  }
 
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/ax3Q7XZb3yU" 
-                            title="John Meadows Back Workout" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>Mountain Dog Specialitet - Back Pump:</h4>
-                    <ul>
-                        <li><strong>Meadows Rows:</strong> Hans signaturövning för lat-aktivering</li>
-                        <li><strong>Death March Rows:</strong> Walking dumbbells rows för metabolisk stress</li>
-                        <li><strong>High Rep Pulldowns:</strong> 25-30 reps för pump</li>
-                    </ul>
-                    <span class="sets-reps">Varierande - fokus på pump och känna muskeln</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Leg Workouts -->
-        <div id="ben" class="section">
-            <h2>🦵 Benträning</h2>
-            
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">TF</div>
-                    <div class="influencer-info">
-                        <h3>Tom Platz - Legendary Leg Workout</h3>
-                        <p>The Quadfather</p>
-                    </div>
-                    <span class="social-badge">Legendary Status</span>
-                </div>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/P8WCJBXuDCY" 
-                            title="Tom Platz Leg Training" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>Platz's Intensity-metod:</h4>
-                    <ul>
-                        <li><strong>High Bar Squats:</strong> 20+ reps för benvolym</li>
-                        <li><strong>Hack Squats:</strong> Deep stretch, full ROM</li>
-                        <li><strong>Leg Extensions:</strong> Super high reps (50-100)</li>
-                        <li><strong>Sissy Squats:</strong> Extreme quad burn</li>
-                    </ul>
-                    <span class="sets-reps">5-8 sets × 10-20+ reps</span>
-                    
-                    <div class="pro-tip">
-                        <strong>💡 Platz Philosophy:</strong> "Don't just move weight. FEEL every fiber of your muscle working. Mental intensity = Physical results."
-                    </div>
-                </div>
-            </div>
-
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">AC</div>
-                    <div class="influencer-info">
-                        <h3>Alex Eubank - Aesthetic Legs</h3>
-                        <p>Natural Bodybuilder</p>
-                    </div>
-                    <span class="social-badge">Instagram: @alexeubank</span>
-                </div>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/X3O7RidqJTQ" 
-                            title="Alex Eubank Leg Workout" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>Balanced Leg Development:</h4>
-                    <ul>
-                        <li><strong>Bulgarian Split Squats:</strong> Unilateral styrka och balans</li>
-                        <li><strong>Romanian Deadlifts:</strong> Hamstring massa</li>
-                        <li><strong>Leg Press:</strong> Högvolym quad träning</li>
-                        <li><strong>Walking Lunges:</strong> Funktionell styrka</li>
-                    </ul>
-                    <span class="sets-reps">3-4 sets × 8-12 reps</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Shoulder Workouts -->
-        <div id="axlar" class="section">
-            <h2>💪 Axelträning</h2>
-            
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">JC</div>
-                    <div class="influencer-info">
-                        <h3>Jesse James West - Boulder Shoulders</h3>
-                        <p>YouTube Fitness Personality</p>
-                    </div>
-                    <span class="social-badge">YouTube: Jesse James West</span>
-                </div>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/oo3_eDgVFmI" 
-                            title="Jesse James West Shoulder Workout" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>Komplett axelutveckling:</h4>
-                    <ul>
-                        <li><strong>Overhead Press:</strong> Compound för total axelstyrka</li>
-                        <li><strong>Lateral Raises:</strong> Side delts - viktigt för bredd</li>
-                        <li><strong>Rear Delt Flyes:</strong> Balans och postur</li>
-                        <li><strong>Arnold Press:</strong> All three heads activation</li>
-                    </ul>
-                    <span class="sets-reps">4 sets × 10-15 reps</span>
-                    
-                    <div class="pro-tip">
-                        <strong>💡 Jesse's Tip:</strong> Axlar svarar bra på volym. Träna dem 2-3 gånger per vecka med olika rep-ranges.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Arm Workouts -->
-        <div id="armar" class="section">
-            <h2>💪 Armträning</h2>
-            
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">LB</div>
-                    <div class="influencer-info">
-                        <h3>Larry Wheels - Powerbuilding Arms</h3>
-                        <p>Strength & Size Specialist</p>
-                    </div>
-                    <span class="social-badge">Instagram: @larrywheels</span>
-                </div>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/3gzsfF9CPSU" 
-                            title="Larry Wheels Arm Workout" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>Styrka + Storlek combo:</h4>
-                    <ul>
-                        <li><strong>Close Grip Bench:</strong> Tricep massa och styrka</li>
-                        <li><strong>Weighted Chin-Ups:</strong> Bicep tjocklek</li>
-                        <li><strong>Skull Crushers:</strong> Tricep långhuvud stretch</li>
-                        <li><strong>Barbell Curls:</strong> Heavy bicep work</li>
-                        <li><strong>Overhead Tricep Extension:</strong> Full ROM för triceps</li>
-                    </ul>
-                    <span class="sets-reps">4-5 sets × 6-12 reps</span>
-                    
-                    <div class="pro-tip">
-                        <strong>💡 Larry's Method:</strong> Start heavy with compounds, finish with isolation. Mind-muscle connection är nyckeln för armar.
-                    </div>
-                </div>
-            </div>
-
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">SA</div>
-                    <div class="influencer-info">
-                        <h3>Simeon Panda - Arm Superset Protocol</h3>
-                        <p>Natural Bodybuilding Icon</p>
-                    </div>
-                    <span class="social-badge">Instagram: @simeonpanda</span>
-                </div>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dIVbj0aKj_I" 
-                            title="Simeon Panda Arm Training" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>Superset Intensity:</h4>
-                    <ul>
-                        <li><strong>Superset 1:</strong> Preacher Curls + Rope Pushdowns</li>
-                        <li><strong>Superset 2:</strong> Hammer Curls + Overhead Extensions</li>
-                        <li><strong>Superset 3:</strong> Cable Curls + Dips</li>
-                    </ul>
-                    <span class="sets-reps">3-4 supersets × 10-12 reps vardera</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Diamond Gym Discipline Section -->
-        <div class="section">
-            <h2>💎 DIAMOND GYM - Mental Disciplin & Mindset</h2>
-            
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">💎</div>
-                    <div class="influencer-info">
-                        <h3>The Diamond Gym Philosophy</h3>
-                        <p>Where Legends Are Forged Through Mental Strength</p>
-                    </div>
-                    <span class="social-badge">Premier Training Facility</span>
-                </div>
-
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
-                    Diamond Gym är inte bara ett gym - det är en mental battlefield där disciplin smids genom järnvilja. Här tränar några av världens hårdaste atleter, och deras hemlighet är inte bara fysisk styrka, utan mental tuffhet som skiljer champions från alla andra.
-                </p>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/qBRCpUxXjHU" 
-                            title="Diamond Gym Training Culture" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>🧠 Diamond Gym's Mental Disciplin-Principer:</h4>
-                    <ul>
-                        <li><strong>Pain is Temporary, Pride is Forever:</strong> När det gör ont är det där det räknas. Pusha igenom den mentala barriären.</li>
-                        <li><strong>No Excuses Policy:</strong> Väder, trötthet, stress - inget är en ursäkt. Du visar upp eller så ger du upp.</li>
-                        <li><strong>Accountability Culture:</strong> Träna med partners som håller dig ansvarig. Ingen skippar sets här.</li>
-                        <li><strong>Visualize Before You Execute:</strong> Se dig själv klara liften innan du gör den. Mental prep = fysisk prestation.</li>
-                        <li><strong>Embrace the Grind:</strong> Älska processen, inte bara resultatet. Varje rep bygger karaktär.</li>
-                        <li><strong>Ego Check:</strong> Lämna egot utanför. Fokusera på din egen progress, inte på att imponera andra.</li>
-                    </ul>
-                </div>
-
-                <div class="pro-tip">
-                    <strong>💎 Diamond Gym Mantra:</strong> "When your mind tells you you're done, you're only at 40% of your capacity. The real work starts when you want to quit."
-                </div>
-            </div>
-
-            <!-- Influencer Training Sessions at Diamond Gym -->
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">🔥</div>
-                    <div class="influencer-info">
-                        <h3>Influencers Testing Diamond Gym's Intensity</h3>
-                        <p>Legendary Training Sessions & Results</p>
-                    </div>
-                </div>
-
-                <p style="margin-bottom: 1.5rem;">
-                    När kända influencers besöker Diamond Gym händer magin. De möter en kultur av disciplin som pushar dem till nya nivåer. Här är några episka sessions:
-                </p>
-
-                <div class="video-grid">
-                    <div>
-                        <h4 style="color: #ff0040; margin-bottom: 1rem;">💪 Jesse James West vs Diamond Gym</h4>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/d5K3UxFEkVU" 
-                                    title="Jesse James West Diamond Gym" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="exercise-details">
-                            <p><strong>Resultat:</strong> Jesse pushade sig till absoluta gränsen med leg day intensitet han aldrig upplevt innan. Hans takeaway: "Mental toughness är skillnaden mellan good och great."</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h4 style="color: #ff0040; margin-bottom: 1rem;">🏆 Sam Sulek's Diamond Experience</h4>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Gp6FM_l1WQA" 
-                                    title="Sam Sulek Diamond Gym Training" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="exercise-details">
-                            <p><strong>Resultat:</strong> Sam's already intense training got amplified. Han lärde sig att pusha förbi mental failure - resultatet blev hans bästa pump någonsin.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- How to Build Diamond Gym Discipline -->
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">🎯</div>
-                    <div class="influencer-info">
-                        <h3>Så Bygger Du Diamond Gym-Disciplin</h3>
-                        <p>Steg-för-Steg Mental Träning</p>
-                    </div>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>📋 Vecka 1-2: Foundation Phase</h4>
-                    <ul>
-                        <li><strong>Sätt Icke-Förhandlingsbara Regler:</strong> Bestäm dina träningsdagar och håll dem heliga. Inget får störa.</li>
-                        <li><strong>Morning Routine:</strong> Vakna samma tid varje dag. Disciplin börjar med alarm-klockan.</li>
-                        <li><strong>Pre-Workout Ritual:</strong> Skapa en mental prep-rutin. Musik, visualisering, self-talk.</li>
-                    </ul>
-
-                    <h4 style="margin-top: 1.5rem;">📋 Vecka 3-4: Intensity Phase</h4>
-                    <ul>
-                        <li><strong>Add One Extra Rep:</strong> När du tror du är klar - gör EN till. Varje gång.</li>
-                        <li><strong>Eliminate Comfort Zones:</strong> Ta övningar du hatar och gör dem först. Face your fears.</li>
-                        <li><strong>Training Journal:</strong> Skriv ner varje pass. Se din progress = Fuel din motivation.</li>
-                    </ul>
-
-                    <h4 style="margin-top: 1.5rem;">📋 Vecka 5-8: Beast Mode Phase</h4>
-                    <ul>
-                        <li><strong>Drop Sets to Failure:</strong> Pusha till absolut muscle failure. Lär dig skillnaden mellan "jag vill sluta" och "jag kan inte fysiskt mer".</li>
-                        <li><strong>Cold Exposure:</strong> Kalla duschar efter träning. Träna mental tuffhet dagligen.</li>
-                        <li><strong>Accountability Partner:</strong> Hitta någon som är hungrigare än dig. Träna tillsammans.</li>
-                    </ul>
-
-                    <h4 style="margin-top: 1.5rem;">📋 Vecka 9+: Diamond Status</h4>
-                    <ul>
-                        <li><strong>No Days Off Mentality:</strong> Även rest days är aktiv recovery - stretching, walking, mobility.</li>
-                        <li><strong>Mental Visualization:</strong> 10 min varje dag - visualisera din framtida kropp och styrka.</li>
-                        <li><strong>Teach Others:</strong> När du hjälper andra blir du själv starkare. Dela din resa.</li>
-                    </ul>
-                </div>
-
-                <div class="pro-tip">
-                    <strong>🔥 Diamond Gym Secret:</strong> Disciplin är inte något du HAR, det är något du GÖR. Varje dag du visar upp bygger den muskeln starkare. Miss en dag och den försvagas. Consistency is EVERYTHING.
-                </div>
-            </div>
-
-            <!-- Mental Warfare Tactics -->
-            <div class="workout-card">
-                <div class="influencer-header">
-                    <div class="influencer-avatar">⚔️</div>
-                    <div class="influencer-info">
-                        <h3>Mental Warfare: Crush Your Inner Doubts</h3>
-                        <p>Psychological Tactics från Diamond Gym Veterans</p>
-                    </div>
-                </div>
-
-                <div class="exercise-details">
-                    <h4>🧠 Tactical Mental Strategies:</h4>
-                    <ul>
-                        <li><strong>The 5-Second Rule:</strong> När du inte känner för gym - count 5-4-3-2-1-GO. Ingen thinking, bara handling.</li>
-                        <li><strong>Future Self Motivation:</strong> Fråga dig: "Kommer jag ångra att jag INTE tränade idag?" Svaret är alltid ja.</li>
-                        <li><strong>Pain Reframing:</strong> Smärta = Progress. När det bränner i musklerna - smile. Det betyder tillväxt.</li>
-                        <li><strong>Competition Mindset:</strong> Tävla mot din igår. Var 1% bättre varje session.</li>
-                        <li><strong>Identity Shift:</strong> Sluta säga "Jag försöker träna". Säg "Jag ÄR en atlet". Act like it.</li>
-                        <li><strong>Embrace Discomfort:</strong> Söker du comfort eller championship? Du kan inte ha båda.</li>
-                    </ul>
-                </div>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/8svuSIYQu74" 
-                            title="Mental Toughness Training" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="pro-tip" style="background: rgba(255, 0, 64, 0.2); border-left: 4px solid #ff0040;">
-                    <strong>💎 ULTIMATE TRUTH:</strong> "Everyone wants to be a beast until it's time to do what beasts do." - Diamond Gym saying. When everyone else quits, that's when you separate yourself. That's when legends are made.
-                </div>
-            </div>
-        </div>
-
-        <!-- Training Tips from Pros -->
-        <div class="section">
-            <h2>🔥 Pro Tips från Eliten</h2>
-            
-            <div class="exercise-details">
-                <h4>Universella Principer:</h4>
-                <ul>
-                    <li><strong>Progressive Overload:</strong> Öka belastning över tid - antingen vikt, reps eller volym</li>
-                    <li><strong>Mind-Muscle Connection:</strong> Fokusera på att KÄNNA muskeln arbeta, inte bara flytta vikten</li>
-                    <li><strong>Full Range of Motion:</strong> Stretch och contraction ger bäst hypertrofi</li>
-                    <li><strong>Recovery är King:</strong> Sömn 7-9h, kost med tillräckligt protein (2g/kg kroppsvikt)</li>
-                    <li><strong>Consistency > Perfection:</strong> Bättre att träna 80% optimalt i 52 veckor än 100% i 4 veckor</li>
-                    <li><strong>Video Your Form:</strong> Filma dig själv för att se tekniken från sidan</li>
-                    <li><strong>Deload Weeks:</strong> Var 4-6:e vecka, träna med 60% intensitet för återhämtning</li>
-                </ul>
-            </div>
-
-            <div class="pro-tip" style="margin-top: 2rem;">
-                <strong>⚠️ VARNING:</strong> Dessa är avancerade program från elitatleter. Börja alltid med lättare vikter och mästra tekniken. Konsultera en tränare om du är osäker. Lyssna på din kropp och undvik skador genom att progressera smart.
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Elite Fitness Workouts - Social Media Edition</p>
-        <p>Inspirerat av världens bästa atleter och influencers</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">Disclaimer: Videor och innehåll ägs av respektive skapare. Detta är endast för utbildningsändamål.</p>
-    </footer>
+  function pauseVideo(i) {
+    videos[i].src = "";
+  }
+</script>
 
 </body>
 </html>
